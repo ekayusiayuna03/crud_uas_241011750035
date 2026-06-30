@@ -28,22 +28,3 @@ Route::get('/migrate', function () {
         return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
 })->withoutMiddleware('web');
-
-Route::get('/test-deploy', function () {
-    return 'HELLO_WORLD_DEPLOYED';
-})->withoutMiddleware('web');
-
-Route::get('/test-db', function () {
-    try {
-        $config = \Illuminate\Support\Facades\DB::connection()->getConfig();
-        return [
-            'driver' => $config['driver'] ?? 'unknown',
-            'database' => $config['database'] ?? 'unknown',
-            'host' => $config['host'] ?? 'unknown',
-            'count' => \App\Models\JadwalPertandingan::count(),
-            'data' => \App\Models\JadwalPertandingan::all(),
-        ];
-    } catch (\Throwable $e) {
-        return 'Error: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
-    }
-})->withoutMiddleware('web');
