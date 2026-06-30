@@ -20,7 +20,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/jadwal/export', [JadwalPertandinganController::class, 'exportPdf'])->name('admin.export');
 });
 
-// Migration helper route for remote database initialization
 Route::get('/migrate', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
@@ -28,8 +27,8 @@ Route::get('/migrate', function () {
     } catch (\Throwable $e) {
         return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
-})->withoutMiddleware();
+})->withoutMiddleware('web');
 
 Route::get('/test-deploy', function () {
     return 'HELLO_WORLD_DEPLOYED';
-})->withoutMiddleware();
+})->withoutMiddleware('web');
