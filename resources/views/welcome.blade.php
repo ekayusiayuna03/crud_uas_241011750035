@@ -50,7 +50,7 @@
                     
                     <div style="position: absolute; bottom: 15px; left: 15px; background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(5px); border-radius: 8px; padding: 6px 12px; border: 1px solid rgba(255, 255, 255, 0.1);" class="d-flex align-items-center gap-2">
                         <i class="fa-regular fa-calendar-days text-info"></i>
-                        <span class="text-white fw-bold small">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d M Y') }}</span>
+                        <span class="text-white fw-bold small">{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</span>
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-secondary ps-0">Tanggal</td>
-                                    <td><i class="fa-regular fa-calendar me-2 text-warning"></i> {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('l, d F Y') }}</td>
+                                    <td><i class="fa-regular fa-calendar me-2 text-warning"></i> {{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-secondary ps-0">Tempat</td>
