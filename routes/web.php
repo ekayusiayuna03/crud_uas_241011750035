@@ -37,3 +37,16 @@ Route::get('/debug-home', function () {
         return 'Error: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
 })->withoutMiddleware('web');
+
+Route::get('/test-key', function () {
+    try {
+        return [
+            'app_key' => env('APP_KEY') ? 'exists' : 'missing',
+            'key_length' => strlen(env('APP_KEY')),
+            'config_key' => config('app.key') ? 'exists' : 'missing',
+            'config_key_length' => strlen(config('app.key')),
+        ];
+    } catch (\Throwable $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+})->withoutMiddleware('web');
