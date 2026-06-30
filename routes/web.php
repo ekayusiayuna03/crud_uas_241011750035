@@ -32,3 +32,11 @@ Route::get('/migrate', function () {
 Route::get('/test-deploy', function () {
     return 'HELLO_WORLD_DEPLOYED';
 })->withoutMiddleware('web');
+
+Route::get('/test-db', function () {
+    try {
+        return \App\Models\JadwalPertandingan::all();
+    } catch (\Throwable $e) {
+        return 'Error: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
+    }
+})->withoutMiddleware('web');
