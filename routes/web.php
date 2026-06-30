@@ -28,4 +28,4 @@ Route::get('/migrate', function () {
     } catch (\Throwable $e) {
         return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
-});
+})->withoutMiddleware();
