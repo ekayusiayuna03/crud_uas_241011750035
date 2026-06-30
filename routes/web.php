@@ -29,3 +29,7 @@ Route::get('/migrate', function () {
         return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
 })->withoutMiddleware();
+
+Route::get('/test-deploy', function () {
+    return 'HELLO_WORLD_DEPLOYED';
+})->withoutMiddleware();
