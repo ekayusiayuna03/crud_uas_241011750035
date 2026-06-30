@@ -28,25 +28,3 @@ Route::get('/migrate', function () {
         return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
 })->withoutMiddleware('web');
-
-Route::get('/debug-home', function () {
-    try {
-        $controller = new \App\Http\Controllers\JadwalPertandinganController();
-        return $controller->index(request());
-    } catch (\Throwable $e) {
-        return 'Error: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
-    }
-})->withoutMiddleware('web');
-
-Route::get('/test-key', function () {
-    try {
-        return [
-            'app_key' => env('APP_KEY') ? 'exists' : 'missing',
-            'key_length' => strlen(env('APP_KEY')),
-            'config_key' => config('app.key') ? 'exists' : 'missing',
-            'config_key_length' => strlen(config('app.key')),
-        ];
-    } catch (\Throwable $e) {
-        return 'Error: ' . $e->getMessage();
-    }
-})->withoutMiddleware('web');
