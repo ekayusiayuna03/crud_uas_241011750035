@@ -25,7 +25,7 @@ Route::get('/migrate', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
         return 'Migration and seeding run successfully! Output: <br><pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
-    } catch (\Exception $e) {
-        return 'Error during migration: ' . $e->getMessage();
+    } catch (\Throwable $e) {
+        return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
 });
