@@ -35,7 +35,14 @@ Route::get('/test-deploy', function () {
 
 Route::get('/test-db', function () {
     try {
-        return \App\Models\JadwalPertandingan::all();
+        $config = \Illuminate\Support\Facades\DB::connection()->getConfig();
+        return [
+            'driver' => $config['driver'] ?? 'unknown',
+            'database' => $config['database'] ?? 'unknown',
+            'host' => $config['host'] ?? 'unknown',
+            'count' => \App\Models\JadwalPertandingan::count(),
+            'data' => \App\Models\JadwalPertandingan::all(),
+        ];
     } catch (\Throwable $e) {
         return 'Error: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
