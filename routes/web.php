@@ -28,3 +28,12 @@ Route::get('/migrate', function () {
         return 'Error during migration: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
     }
 })->withoutMiddleware('web');
+
+Route::get('/debug-home', function () {
+    try {
+        $controller = new \App\Http\Controllers\JadwalPertandinganController();
+        return $controller->index(request());
+    } catch (\Throwable $e) {
+        return 'Error: ' . $e->getMessage() . '<br><pre>' . $e->getTraceAsString() . '</pre>';
+    }
+})->withoutMiddleware('web');
