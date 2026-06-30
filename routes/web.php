@@ -19,3 +19,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/jadwal/{id}/destroy', [JadwalPertandinganController::class, 'destroy'])->name('admin.destroy');
     Route::get('/admin/jadwal/export', [JadwalPertandinganController::class, 'exportPdf'])->name('admin.export');
 });
+
+// Migration helper route for remote database initialization
+Route::get('/migrate', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+        return 'Migration and seeding run successfully! Output: <br><pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+    } catch (\Exception $e) {
+        return 'Error during migration: ' . $e->getMessage();
+    }
+});
